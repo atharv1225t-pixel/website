@@ -66,6 +66,8 @@ html{
 
     scroll-behavior:smooth;
 
+    overflow-x:hidden;
+
 }
 
 body{
@@ -83,6 +85,8 @@ body{
 }
 
 img{
+
+    max-width:100%;
 
     width:100%;
 
@@ -122,11 +126,41 @@ section{
 
 .container{
 
-    width:92%;
-
-    max-width:var(--container);
+    width:min(92%, var(--container));
 
     margin:auto;
+
+}
+
+.hero-wrapper,
+.about-wrapper,
+.contact-wrapper,
+.cta-wrapper,
+.footer-grid,
+.product-grid,
+.category-grid,
+.featured-grid,
+.feature-grid,
+.testimonial-grid,
+.instagram-grid,
+.grid-2,
+.grid-3,
+.grid-4{
+
+    min-width:0;
+
+}
+
+.hero-content,
+.about-content,
+.product-content,
+.contact-card,
+.category-card,
+.feature-card,
+.testimonial,
+.footer-grid > div{
+
+    min-width:0;
 
 }
 
@@ -267,6 +301,12 @@ BUTTONS
     font-weight:600;
 
     transition:var(--transition);
+
+    text-align:center;
+
+    line-height:1.35;
+
+    white-space:normal;
 
 }
 
@@ -573,7 +613,7 @@ HERO SECTION
 
 .hero{
 
-    min-height:100vh;
+    min-height:100svh;
 
     display:flex;
 
@@ -589,6 +629,12 @@ HERO SECTION
         #FDFBF8 45%,
         #EFE3D1 100%
     );
+
+}
+
+.hero .container{
+
+    padding-top:88px;
 
 }
 
@@ -689,6 +735,10 @@ HERO SECTION
     box-shadow:0 35px 70px rgba(0,0,0,.18);
 
     transition:.5s;
+
+    max-height:680px;
+
+    object-fit:cover;
 
 }
 
@@ -866,7 +916,7 @@ FEATURED COLLECTION
 
 .feature-box img{
 
-    height:520px;
+    height:clamp(320px, 40vw, 520px);
 
     object-fit:cover;
 
@@ -996,7 +1046,7 @@ TOP SELLING PRODUCTS
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
 
     gap:35px;
 
@@ -1015,6 +1065,10 @@ TOP SELLING PRODUCTS
     transition:.4s;
 
     box-shadow:var(--shadow);
+
+    display:flex;
+
+    flex-direction:column;
 
 }
 
@@ -1036,7 +1090,7 @@ TOP SELLING PRODUCTS
 
 .product-image img{
 
-    height:340px;
+    height:clamp(260px, 28vw, 340px);
 
     object-fit:cover;
 
@@ -1076,17 +1130,27 @@ TOP SELLING PRODUCTS
 
     padding:30px;
 
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
 }
 
 .product-content h3{
 
     margin-bottom:12px;
 
+    overflow-wrap:anywhere;
+
 }
 
 .product-content p{
 
     margin-bottom:20px;
+
+    overflow-wrap:anywhere;
 
 }
 
@@ -1159,6 +1223,12 @@ TOP SELLING PRODUCTS
 .product-content .btn{
 
     margin-bottom:12px;
+
+}
+
+.product-content .btn-primary{
+
+    margin-top:auto;
 
 }
 
@@ -1268,7 +1338,7 @@ SHOPPING CART
 
     top:0;
 
-    right:-420px;
+    right:0;
 
     width:min(420px, 100%);
 
@@ -1284,13 +1354,15 @@ SHOPPING CART
 
     box-shadow:-20px 0 55px rgba(0,0,0,.18);
 
+    transform:translateX(100%);
+
     transition:.35s;
 
 }
 
 .cart-drawer.active{
 
-    right:0;
+    transform:translateX(0);
 
 }
 
