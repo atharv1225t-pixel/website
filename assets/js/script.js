@@ -70,15 +70,29 @@ STICKY NAVBAR
 
 const header = document.querySelector("header");
 
+let isScrolled = false;
+
 window.addEventListener("scroll", () => {
 
     if (window.scrollY > 80) {
 
-        header.classList.add("scrolled");
+        if (!isScrolled) {
+
+            header.classList.add("scrolled");
+
+            isScrolled = true;
+
+        }
 
     } else {
 
-        header.classList.remove("scrolled");
+        if (isScrolled) {
+
+            header.classList.remove("scrolled");
+
+            isScrolled = false;
+
+        }
 
     }
 
@@ -94,27 +108,65 @@ SCROLL REVEAL
 
 const reveals = document.querySelectorAll(".reveal");
 
-function revealElements() {
+if ("IntersectionObserver" in window) {
 
-    const windowHeight = window.innerHeight;
+    const observer = new IntersectionObserver((entries) => {
 
-    reveals.forEach(item => {
+        entries.forEach(entry => {
 
-        const top = item.getBoundingClientRect().top;
+            if (entry.isIntersecting) {
 
-        if (top < windowHeight - 120) {
+                entry.target.classList.add("active");
 
-            item.classList.add("active");
+                observer.unobserve(entry.target);
 
-        }
+            }
+
+        });
+
+    }, {
+
+        root: null,
+
+        rootMargin: "0px 0px -120px 0px",
+
+        threshold: 0.02
 
     });
 
+    reveals.forEach(item => observer.observe(item));
+
+} else {
+
+    function revealElements() {
+
+        const windowHeight = window.innerHeight;
+
+        reveals.forEach(item => {
+
+            if (!item.classList.contains("active")) {
+
+                const top = item.getBoundingClientRect().top;
+
+                if (top < windowHeight - 120) {
+
+                    item.classList.add("active");
+
+                }
+
+            }
+
+        });
+
+    }
+
+    window.addEventListener("scroll", revealElements);
+
+    window.addEventListener("load", revealElements);
+
+    revealElements();
+
 }
-
-window.addEventListener("scroll", revealElements);
-
-window.addEventListener("load", revealElements);
 
 
 

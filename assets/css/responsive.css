@@ -120,7 +120,6 @@ LAPTOP / SMALL DESKTOP
     }
 
     .feature-grid,
-    .featured-grid,
     .testimonial-grid,
     .instagram-grid,
     .grid-4{
@@ -361,19 +360,16 @@ PHONE / LARGE PHONE
     }
 
     .hero-image img,
-    .about-image,
-    .feature-box{
+    .about-image{
 
         border-radius:18px;
 
     }
 
     .category-grid,
-    .featured-grid,
     .feature-grid,
     .testimonial-grid,
     .footer-grid,
-    .grid-3,
     .grid-4{
 
         grid-template-columns:1fr;
@@ -389,12 +385,6 @@ PHONE / LARGE PHONE
     .product-image img{
 
         height:300px;
-
-    }
-
-    .feature-box img{
-
-        height:360px;
 
     }
 
