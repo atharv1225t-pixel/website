@@ -24,9 +24,9 @@ if (menuBtn && navLinks) {
 
         menuBtn.innerHTML = navLinks.classList.contains("active")
 
-            ? "✕"
+            ? '<i class="fa-solid fa-xmark"></i>'
 
-            : "☰";
+            : '<i class="fa-solid fa-bars"></i>';
 
     });
 
@@ -52,7 +52,7 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 
         if (menuBtn) {
 
-            menuBtn.innerHTML = "☰";
+            menuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
 
         }
 
