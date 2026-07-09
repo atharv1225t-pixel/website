@@ -704,3 +704,100 @@ VERY SMALL PHONE
     }
 
 }
+
+/*=========================================================
+MOBILE OPTIMIZATIONS (SIDEBAR & FAQ ACCORDION)
+==========================================================*/
+@media (max-width: 992px) {
+
+    .shop-sidebar {
+
+        background: transparent !important;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        padding: 0 !important;
+
+    }
+
+    .sidebar-title {
+
+        display: none !important;
+
+    }
+
+    .shop-categories {
+
+        padding: 4px 0 16px;
+
+        scrollbar-width: none !important;
+
+        -ms-overflow-style: none !important;
+
+    }
+
+    .shop-categories::-webkit-scrollbar {
+
+        display: none !important;
+
+    }
+
+    .shop-categories li {
+
+        background: white;
+
+        border: 1px solid var(--border);
+
+        padding: 8px 16px;
+
+        border-radius: 20px;
+
+        gap: 10px;
+
+    }
+
+    .shop-categories li.active {
+
+        background: var(--gold);
+
+        border-color: var(--gold);
+
+        color: white;
+
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .faq-grid {
+
+        margin-top: 25px;
+
+        gap: 12px;
+
+    }
+
+    .faq-question {
+
+        padding: 16px 20px;
+
+        font-size: 15px;
+
+    }
+
+    .faq-answer {
+
+        padding: 0 20px;
+
+    }
+
+    .faq-item.active .faq-answer {
+
+        padding-bottom: 18px;
+
+    }
+
+}
