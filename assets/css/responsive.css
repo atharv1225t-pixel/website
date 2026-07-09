@@ -707,8 +707,15 @@ VERY SMALL PHONE
 
 /*=========================================================
 MOBILE OPTIMIZATIONS (SIDEBAR & FAQ ACCORDION)
-==========================================================*/
 @media (max-width: 992px) {
+
+    .shop-layout {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+    }
 
     .shop-sidebar {
 
@@ -719,6 +726,12 @@ MOBILE OPTIMIZATIONS (SIDEBAR & FAQ ACCORDION)
         box-shadow: none !important;
 
         padding: 0 !important;
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        overflow: hidden !important;
 
     }
 
@@ -736,11 +749,25 @@ MOBILE OPTIMIZATIONS (SIDEBAR & FAQ ACCORDION)
 
         -ms-overflow-style: none !important;
 
+        width: 100% !important;
+
+        max-width: 100% !important;
+
     }
 
     .shop-categories::-webkit-scrollbar {
 
         display: none !important;
+
+    }
+
+    .shop-main {
+
+        min-width: 0 !important;
+
+        width: 100% !important;
+
+        max-width: 100% !important;
 
     }
 
