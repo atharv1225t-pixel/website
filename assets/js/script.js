@@ -645,3 +645,242 @@ if (cartClear) {
 cart = normalizeCartItems(getStoredCart());
 
 renderCart();
+
+/*=========================================================
+SHOP FILTERING & SORTING COLLECTION INTERACTION
+==========================================================*/
+document.addEventListener("DOMContentLoaded", () => {
+    const productGrid = document.getElementById("shop-product-grid");
+    if (!productGrid) return;
+
+    const categoryItems = document.querySelectorAll(".shop-categories li");
+    const sortTrigger = document.getElementById("sort-trigger");
+    const sortMenu = document.getElementById("sort-menu");
+    const sortItems = document.querySelectorAll("#sort-menu li");
+    const visibleCountSpan = document.getElementById("visible-count");
+
+    // Load and wrap all product cards
+    const cards = Array.from(productGrid.querySelectorAll(".product-card"));
+    
+    // Parse products and extract information
+    const products = cards.map((card, index) => {
+        const titleEl = card.querySelector("h3");
+        const descEl = card.querySelector("p");
+        const title = titleEl ? titleEl.textContent : "";
+        const desc = descEl ? descEl.textContent : "";
+        const textLower = (title + " " + desc).toLowerCase();
+        const badgeEl = card.querySelector(".product-badge");
+        const badge = badgeEl ? badgeEl.textContent.toLowerCase() : "";
+        
+        // Find price
+        const priceEl = card.querySelector(".product-price");
+        let price = 0;
+        if (priceEl) {
+            const matches = priceEl.textContent.match(/\d+/g);
+            if (matches) {
+                price = parseInt(matches.join(""), 10);
+            }
+        }
+
+        // Determine if it is table or sink
+        const isTable = badge.includes("table") || textLower.includes("table");
+        const isSink = !isTable;
+
+        // Categorize
+        const gemstoneKws = ["gemstone", "malachite", "amethyst", "quartz", "agate", "lapis", "tiger eye", "jasper", "aventurine", "sodalite", "fluorite", "labradorite", "semi precious", "turquoise"];
+        const hasGemstone = gemstoneKws.some(kw => textLower.includes(kw));
+
+        const categories = ["all", "on-sale"];
+
+        // 1. Luxury Gemstone Sink
+        if (isSink && hasGemstone) {
+            categories.push("gemstone-sink");
+        }
+        // 2. Luxurious Marble Sinks
+        if (isSink && textLower.includes("marble") && !hasGemstone && !textLower.includes("onyx")) {
+            categories.push("marble-sink");
+        }
+        // 3. Marble Sinks with Vanity
+        if (isSink && (textLower.includes("double") || textLower.includes("cabinet") || textLower.includes("drawer"))) {
+            categories.push("vanity-sink");
+        }
+        // 4. Marble Side Tables
+        if (isTable && (textLower.includes("marble") || textLower.includes("onyx")) && !hasGemstone) {
+            categories.push("marble-table");
+        }
+        // 5. Gemstone Side Tables
+        if (isTable && hasGemstone) {
+            categories.push("gemstone-table");
+        }
+        // 6. Semi Precious Stones
+        if (textLower.includes("semi precious") || (hasGemstone && isTable)) {
+            categories.push("semi-precious");
+        }
+        // 7. Luxury Pedestal Sinks
+        if (isSink && textLower.includes("pedestal")) {
+            categories.push("pedestal-sink");
+        }
+        // 8. Luxury Onyx Stone Sinks
+        if (isSink && textLower.includes("onyx")) {
+            categories.push("onyx-sink");
+        }
+
+        return {
+            element: card,
+            title,
+            price,
+            index, // Relevance / Default order
+            categories
+        };
+    });
+
+    let currentCategory = "all";
+    let currentSort = "relevance";
+
+    // Set filter category items count dynamically
+    const categoryCounts = {
+        "all": products.length,
+        "on-sale": products.length,
+        "gemstone-sink": 0,
+        "marble-sink": 0,
+        "vanity-sink": 0,
+        "marble-table": 0,
+        "gemstone-table": 0,
+        "semi-precious": 0,
+        "pedestal-sink": 0,
+        "onyx-sink": 0
+    };
+
+    products.forEach(p => {
+        p.categories.forEach(c => {
+            if (c !== "all" && c !== "on-sale" && c in categoryCounts) {
+                categoryCounts[c]++;
+            }
+        });
+    });
+
+    // Update count labels in sidebar
+    categoryItems.forEach(item => {
+        const cat = item.dataset.category;
+        const countSpan = item.querySelector("span");
+        if (countSpan && cat in categoryCounts) {
+            countSpan.textContent = `(${categoryCounts[cat]})`;
+        }
+    });
+
+    // Toggle sorting dropdown menu
+    if (sortTrigger && sortMenu) {
+        sortTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sortMenu.classList.toggle("show");
+            sortTrigger.classList.toggle("open");
+        });
+
+        document.addEventListener("click", () => {
+            sortMenu.classList.remove("show");
+            sortTrigger.classList.remove("open");
+        });
+    }
+
+    // Apply filtering and sorting
+    function updateList() {
+        // 1. Filter
+        let visibleProducts = products.filter(p => p.categories.includes(currentCategory));
+
+        // Hide all cards first
+        products.forEach(p => p.element.classList.add("hidden"));
+
+        // 2. Sort
+        visibleProducts.sort((a, b) => {
+            if (currentSort === "price-asc") {
+                return a.price - b.price;
+            } else if (currentSort === "price-desc") {
+                return b.price - a.price;
+            } else if (currentSort === "recent") {
+                return b.index - a.index; // Descending index
+            } else {
+                return a.index - b.index; // Relevance (Default index)
+            }
+        });
+
+        // 3. Render visible & sorted in DOM
+        visibleProducts.forEach(p => {
+            p.element.classList.remove("hidden");
+            productGrid.appendChild(p.element);
+        });
+
+        // 4. Update count
+        if (visibleCountSpan) {
+            visibleCountSpan.textContent = visibleProducts.length;
+        }
+
+        // Trigger reveal scroll effect check if function exists in template
+        if (typeof reveal === "function") {
+            reveal();
+        }
+    }
+
+    // Category click handler
+    categoryItems.forEach(item => {
+        item.addEventListener("click", () => {
+            categoryItems.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            currentCategory = item.dataset.category;
+            updateList();
+        });
+    });
+
+    // Sort item click handler
+    sortItems.forEach(item => {
+        item.addEventListener("click", () => {
+            sortItems.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+            
+            const sortVal = item.dataset.sort;
+            currentSort = sortVal;
+
+            if (sortTrigger) {
+                const label = item.textContent.trim();
+                sortTrigger.querySelector("span").textContent = label;
+            }
+
+            updateList();
+        });
+    });
+
+    // Initial load
+    updateList();
+});
+
+/*=========================================================
+FAQ ACCORDION INTERACTION
+==========================================================*/
+document.addEventListener("DOMContentLoaded", () => {
+    const faqQuestions = document.querySelectorAll(".faq-question");
+    faqQuestions.forEach(question => {
+        question.addEventListener("click", () => {
+            const item = question.parentElement;
+            const answer = item.querySelector(".faq-answer");
+            
+            // Toggle active state
+            const isActive = item.classList.contains("active");
+            
+            // Close other items (accordion behavior)
+            document.querySelectorAll(".faq-item").forEach(otherItem => {
+                otherItem.classList.remove("active");
+                const otherAnswer = otherItem.querySelector(".faq-answer");
+                if (otherAnswer) {
+                    otherAnswer.style.maxHeight = null;
+                }
+            });
+            
+            if (!isActive) {
+                item.classList.add("active");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                item.classList.remove("active");
+                answer.style.maxHeight = null;
+            }
+        });
+    });
+});

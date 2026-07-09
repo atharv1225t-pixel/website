@@ -73,6 +73,22 @@ LAPTOP / SMALL DESKTOP
 
     }
 
+    .products-hero{
+
+        min-height:auto;
+
+        background-image:linear-gradient(
+            135deg,
+            rgba(247, 243, 236, 0.75) 0%,
+            rgba(253, 251, 248, 0.75) 45%,
+            rgba(239, 227, 209, 0.75) 100%
+        ),
+        url('../images/hero/products-collection-collage.png');
+
+        background-position:center center;
+
+    }
+
     .hero-content{
 
         order:2;

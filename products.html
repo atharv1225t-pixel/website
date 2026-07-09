@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -43,9 +43,8 @@ HEADER
 
         <a href="index.html"
            class="logo">
-
+            <img src="assets/images/logo/handsome-bath-monogram.png" alt="Handsome Bath Logo" class="nav-logo">
             Handsome<span>Bath</span>
-
         </a>
 
         <ul class="nav-links">
@@ -161,7 +160,7 @@ CART DRAWER
 PAGE HERO
 ==========================================================-->
 
-<section class="hero">
+<section class="hero products-hero">
 
     <div class="container">
 
@@ -191,17 +190,6 @@ PAGE HERO
 
             </div>
 
-
-
-
-
-            <div class="hero-image reveal">
-
-                <img src="assets/images/hero/products-collection-collage.png"
-                     alt="Products">
-
-            </div>
-
         </div>
 
     </div>
@@ -213,115 +201,56 @@ PAGE HERO
 
 
 <!--=========================================================
-CATEGORY NAVIGATION
+SHOP COLLECTION
 ==========================================================-->
 
-<section class="light-bg">
+<section class="shop-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="category-grid">
+        <div class="shop-layout">
 
-<div class="category-card">
+            <!-- Sidebar -->
+            <aside class="shop-sidebar reveal">
+                <h3 class="sidebar-title">Sections</h3>
+                <ul class="shop-categories">
+                    <li class="active" data-category="all">All <span>(118)</span></li>
+                    <li data-category="on-sale">On sale <span>(118)</span></li>
+                    <li data-category="gemstone-sink">Luxury Gemstone Sink <span>(18)</span></li>
+                    <li data-category="marble-sink">Luxurious Marble Sinks <span>(64)</span></li>
+                    <li data-category="vanity-sink">Marble Sinks with Vanity <span>(11)</span></li>
+                    <li data-category="marble-table">Marble Side Tables <span>(11)</span></li>
+                    <li data-category="gemstone-table">Gemstone Side Tables <span>(3)</span></li>
+                    <li data-category="semi-precious">Semi Precious Stones <span>(3)</span></li>
+                    <li data-category="pedestal-sink">Luxury Pedestal Sinks <span>(7)</span></li>
+                    <li data-category="onyx-sink">Luxury Onyx Stone Sinks <span>(1)</span></li>
+                </ul>
+            </aside>
 
-<i class="fa-solid fa-sink"></i>
+            <!-- Main Content Area -->
+            <div class="shop-main">
+                <div class="shop-toolbar reveal">
+                    <div class="product-count">
+                        Showing <span id="visible-count">118</span> products
+                    </div>
+                    <div class="sort-wrapper">
+                        <span class="sort-label">Sort:</span>
+                        <div class="sort-dropdown-container">
+                            <button class="sort-dropdown-trigger" id="sort-trigger">
+                                <span>Relevance</span> <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul class="sort-dropdown-menu" id="sort-menu">
+                                <li data-sort="relevance" class="active">Relevance <i class="fa-solid fa-check"></i></li>
+                                <li data-sort="recent">Most Recent <i class="fa-solid fa-check"></i></li>
+                                <li data-sort="price-asc">Lowest Price <i class="fa-solid fa-check"></i></li>
+                                <li data-sort="price-desc">Highest Price <i class="fa-solid fa-check"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-<h3>
-
-Sinks
-
-</h3>
-
-<a href="#sinks"
-class="btn btn-outline">
-
-View
-
-</a>
-
-</div>
-
-
-
-
-
-<div class="category-card">
-
-<i class="fa-solid fa-table"></i>
-
-<h3>
-
-Tables
-
-</h3>
-
-<a href="#tables"
-class="btn btn-outline">
-
-View
-
-</a>
-
-</div>
-
-
-
-
-
-<div class="category-card">
-
-<i class="fa-solid fa-truck-fast"></i>
-
-<h3>
-
-Ready To Dispatch
-
-</h3>
-
-<a href="#ready"
-class="btn btn-outline">
-
-View
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-
-
-<!--=========================================================
-SINKS
-==========================================================-->
-
-<section id="sinks">
-
-<div class="container">
-
-<h2 class="section-title reveal">
-
-Premium Sinks
-
-</h2>
-
-<p class="section-subtitle reveal">
-
-Luxury handcrafted sinks with premium finishing.
-
-</p>
-
-
-
-
-
-<div class="product-grid">
+                <!-- Unified Product Grid -->
+                <div class="product-grid" id="shop-product-grid">
             <div class="product-card reveal">
                 <div class="product-image">
                     <span class="product-badge">Premium</span>
@@ -2297,37 +2226,7 @@ Luxury handcrafted sinks with premium finishing.
                     <button class="btn btn-outline add-to-cart" type="button" data-name="T-Shape and L-Shape Metal Brackets for Sinks" data-price="17500" data-image="assets/images/products/il_340x270.7695977815_ehei.jpg">Add To Cart</button>
                 </div>
             </div>
-        </div>
 
-</div>
-
-</section>
-<!--=========================================================
-TABLES
-==========================================================-->
-
-<section id="tables" class="light-bg">
-
-    <div class="container">
-
-        <h2 class="section-title reveal">
-
-            Luxury Tables
-
-        </h2>
-
-        <p class="section-subtitle reveal">
-
-            Elegant tables designed to enhance every
-            modern living space.
-
-        </p>
-
-
-
-
-
-        <div class="product-grid">
             <div class="product-card reveal">
                 <div class="product-image">
                     <span class="product-badge">Table</span>
@@ -2592,43 +2491,9 @@ TABLES
                     <a href="https://wa.me/918191960414?text=Hello%20HandsomeBath%2C%20I%20am%20interested%20in%20ordering%20the%20'Handmade%20Rosso%20Levanto%20Marble%20Side%20Table'%20priced%20at%20%E2%82%B987%2C500." target="_blank" rel="noopener" class="btn btn-primary">Contact To Place Order</a>
                     <button class="btn btn-outline add-to-cart" type="button" data-name="Handmade Rosso Levanto Marble Side Table" data-price="87500" data-image="assets/images/products/il_340x270.7605877476_b2i1.jpg">Add To Cart</button>
                 </div>
+
             </div>
-        </div>
 
-    </div>
-
-</section>
-
-
-
-
-
-<!--=========================================================
-READY TO DISPATCH
-==========================================================-->
-
-<section id="ready">
-
-    <div class="container">
-
-        <h2 class="section-title reveal">
-
-            Ready To Dispatch
-
-        </h2>
-
-        <p class="section-subtitle reveal">
-
-            Products available for immediate dispatch.
-
-        </p>
-
-
-
-
-
-        <div class="product-grid">
-            <!-- Available on Custom Request -->
         </div>
 
     </div>
