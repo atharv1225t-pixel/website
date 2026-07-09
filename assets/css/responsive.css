@@ -787,7 +787,23 @@ MOBILE OPTIMIZATIONS (SIDEBAR & FAQ ACCORDION)
 
         max-width: 100% !important;
 
-        overflow: hidden !important;
+    }
+
+    .product-grid {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        min-width: 0 !important;
+
+    }
+
+    .product-card {
+
+        min-width: 0 !important;
+
+        max-width: 100% !important;
 
     }
 

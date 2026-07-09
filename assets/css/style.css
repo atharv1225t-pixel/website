@@ -1039,6 +1039,12 @@ TOP SELLING PRODUCTS
 
     flex-direction:column;
 
+    max-width:100%;
+
+    min-width:0;
+
+    word-break:break-word;
+
 }
 
 .product-card:hover{
